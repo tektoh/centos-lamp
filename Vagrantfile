@@ -32,7 +32,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       "nodejs",
       "i18n",
       "devtools",
-      "webserver"
+      "webserver",
+      "webserver::phpmyadmin"
     ]
     chef.json = {
       mysql: {
@@ -44,7 +45,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       phpmyadmin: {
         blowfish_secret: "blowfish_secret",
         fpm: false
-     }
+      },
+      webserver: {
+        web_apps: {
+           example: {
+            server_name: "example.com",
+            docroot: "/var/www/html"
+          }
+        }
+      }
     }
   end
 end
