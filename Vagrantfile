@@ -24,6 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       "mysql::server",
       "mysql::client",
       "php",
+      "php-extends",
       "apache2",
       "apache2::mod_ssl",
       "memcached",
