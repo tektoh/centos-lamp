@@ -16,8 +16,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.berkshelf.enabled = true
   config.vm.provision :chef_solo do |chef|
     chef.run_list = [
-      "yum::epel",
-      "yum::remi",
+      "yum-epel",
+	  "yum-repoforge",
+      "yum-remi",
       "selinux::disabled",
       "iptables::disabled",
       "git",
@@ -37,23 +38,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       "webserver::phpmyadmin"
     ]
     chef.json = {
-      mysql: {
-        server_root_password: "password",
-        server_debian_password: "password",
-        server_repl_password: "password",
-        bind_address: "127.0.0.1"
+	  "yum" => {
+	    "rpmforge-extras" => {"enabled" => false}
+	  },
+      "mysql" => {
+        "server_root_password" => "password",
+        "server_debian_password" => "password",
+        "server_repl_password" => "password",
+        "bind_address" => "127.0.0.1"
       },
-      phpmyadmin: {
-        blowfish_secret: "blowfish_secret",
-        fpm: false
-      },
-      webserver: {
-        web_apps: {
-           example: {
-            server_name: "example.com",
-            docroot: "/var/www/html"
-          }
-        }
+      "phpmyadmin" => {
+        "blowfish_secret" => "blowfish_secret",
+        "fpm" => false
       }
     }
   end

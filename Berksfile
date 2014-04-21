@@ -1,5 +1,8 @@
 site :opscode
-cookbook "yum"
+cookbook "yum", "~> 3.0.0"
+cookbook "yum-epel"
+cookbook "yum-repoforge"
+cookbook "yum-remi", git: "https://github.com/tektoh/yum-remi.git"
 cookbook "selinux"
 cookbook "iptables"
 cookbook "git"
